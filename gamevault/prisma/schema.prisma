@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum GameStatus {
+A_JOUER
+EN_COURS
+TERMINE
+ABANDONNE
+}
+
+enum Platform {
+PC
+PS5
+XBOX
+SWITCH
+MOBILE
+AUTRE
+}
+
+model Game {
+id Int @id @default ( autoincrement () )
+title String
+platform Platform
+status GameStatus @default ( A_JOUER )
+rating Int ? // Note sur 5 ( nullable )
+imageUrl String ?
+userId String // ID Clerk de l’ utilisateur
+isPublic Boolean @default ( true )
+createdAt DateTime @default ( now () )
+
+updatedAt DateTime @updatedAt
+@@index ([ userId ])
+}
+
+model Comment {
+  id Int @id @default ( autoincrement () )
+  contenu String
+  userId String // ID Clerk de l’ utilisateur
+  targetUserId String // ID Clerk de l’ utilisateur ciblé
+  createdAt DateTime @default ( now () )
+  
+}

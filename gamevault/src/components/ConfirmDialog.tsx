@@ -1,0 +1,1 @@
+// Optionnel: composant de dialogue de confirmation
