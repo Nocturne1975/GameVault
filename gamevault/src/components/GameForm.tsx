@@ -3,7 +3,7 @@
 import * as React from "react";
 import {useRouter, useSearchParams} from "next/navigation";
 
-import type {GameStatus, Platform} from "@/generated/prisma";
+import type {GameStatus, Platform} from "@/generated/prisma/client";
 import { addGame } from "@/actions/games";
 
 type FormState = {
